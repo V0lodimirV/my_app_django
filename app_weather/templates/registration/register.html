@@ -1,0 +1,14 @@
+{% extends 'base_input_output.html' %}
+
+{% block title %}
+    Регистрация
+{% endblock %}
+
+{% block content %}
+    <p>Регистрация</p>
+    <form action="." method="POST">
+        {{ form.as_p }}
+        {% csrf_token %}
+        <input type="submit" value="Create my account">
+    </form>
+{% endblock %}

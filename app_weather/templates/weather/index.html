@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+<header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+      <a class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
+        <svg class="bi me-2" width="40" height="32"></svg>
+        <span class="fs-4">МОЙ ПРОЕКТ</span>
+      </a>
+
+      <ul class="nav nav-pills">
+        <li class="nav-item"><a href="weather_1" class="nav-link" >Погода</a></li>
+        <li class="nav-item"><a href="index_exchange" class="nav-link">Обмен Валют</a></li>
+          <li class="nav-item"><a href="/index_blog" class="nav-link">Блог</a></li>
+          <li class="nav-item"><a href="/accounts/logout/" class="nav-link">Выйти</a></li>
+      </ul>
+    </header>
+{% endblock %}

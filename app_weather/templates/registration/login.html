@@ -1,0 +1,28 @@
+{% extends 'base_input_output.html' %}
+
+{% block title %}
+    Войти
+{% endblock %}
+
+{% block content %}
+   <h2>Добро Пожаловать</h2>
+    <hr>
+
+   <form action="." method="post">
+     {{ form.as_p }}
+     {% csrf_token %}
+       <input type="hidden" name="next" value="{% url 'index' %}">
+        <input type="submit" value="Войти">
+   </form>
+    <li class="google">
+    <a href="{% url 'social:begin' 'google-oauth2' %}">Войти с Google</a>
+    </li>
+    <li>
+   <a href="{% url 'password_reset' %}">Забыли пароль?</a>
+    </li>
+    <li>
+   <a href="{% url 'register' %}">нет аккаунта?</a>
+    </li>
+
+
+{% endblock %}

@@ -1,0 +1,40 @@
+{% extends 'base_blog.html' %}
+{% block content %}
+<header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+      <a class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
+        <svg class="bi me-2" width="40" height="32"></svg>
+      </a>
+
+<ul class="nav nav-pills">
+    <li class="nav-item"><a href="/index" class="nav-link" >Главная страница</a></li>
+    <li class="nav-item"><a href="/weather_1" class="nav-link" >Погода</a></li>
+    <li class="nav-item"><a href="/index_exchange" class="nav-link" >Обмен Валют</a></li>
+</ul>
+</header>
+<body>
+<div class="shell">
+			<div id="content" class="left">
+
+				<div class="projects">
+					<h2>Записи</h2>
+					<hr>
+					{% for blog in blog_list %}
+					<div class="row g-0 bg-light position-relative">
+  <div class="col-md-6 mb-md-0 p-md-4">
+    <img src="{{ blog.img.url }}" width="190px"/>
+  </div>
+  <div class="col-md-6 p-4 ps-md-0">
+    <h5 class="mt-0"><a href="{{ blog.id }}">{{ blog.title }}</a></h5>
+    <p>{{ blog.text_blog }}</p>
+
+  </div>
+</div>
+                    <hr>
+					{% endfor %}
+
+
+{% endblock content %}
+                </div>
+            </div>
+</div>
+

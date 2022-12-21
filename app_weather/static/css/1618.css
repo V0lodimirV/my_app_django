@@ -1,0 +1,23 @@
+.blue-text {
+    color: #dae8ba;
+
+}
+
+body{
+  width: 100%;
+    height: 100vh;
+    background: black;
+    background-image: url('../img/blog.jpg');
+    background-position: center;
+    background-size: cover;
+    position: relative;
+}
+
+.ssss{
+margin-left: 250px;
+
+}
+
+.ss{
+margin-top: 250px;
+}

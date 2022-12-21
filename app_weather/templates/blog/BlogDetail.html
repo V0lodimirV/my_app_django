@@ -1,0 +1,93 @@
+{% extends 'base_blog.html' %}
+{% block content %}
+<header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+      <a class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
+        <svg class="bi me-2" width="40" height="32"></svg>
+      </a>
+<ul class="nav nav-pills">
+	<li class="nav-item"><a href="/index_blog" class="nav-link" >Назад</a></li>
+    <li class="nav-item"><a href="/index" class="nav-link" >Главная страница</a></li>
+    <li class="nav-item"><a href="/weather_1" class="nav-link" >Погода</a></li>
+    <li class="nav-item"><a href="/index_exchange" class="nav-link" >Обмен Валют</a></li>
+</ul>
+
+</header>
+
+<body>
+
+<div class="shell">
+	<div class="border">
+		<div id="main">
+			<div id="content" class="left">
+				<div class="projects">
+					<h4 align="center">{{ blog.title }}</h4>
+                    <p align="center">
+						<br>
+                        <img src="{{ blog.img.url }}" width="45%"/>
+                    </p><br>
+                        <div class="item">
+						<div class="text left">
+							<p>{{ blog.text_blog }}</p>
+							<p>Автор:  {{ blog.author }}</p>
+							<p>{{ blog.date }}</p>
+						</div>
+						<div class="cl"> </div>
+					</div>
+				</div>
+			</div>
+			<div class="cl"></div>
+		</div>
+	</div>
+</div>
+<hr>
+
+{% for comment in blog.comments.all %}
+<div class="sticky-sm-bottom">
+<div class="card text-bg-primary mb-3" style="max-width: 18rem;">
+	<div class="card-header">Комент <span class="badge bg-primary">{{ forloop.counter }}</span> от {{ comment.name }}
+	<br>{{ comment.created }}</div>
+  <div class="comment">
+    <p class="info">
+      <h6>{{ comment.text_comments }}</h6>
+    {{ comment.body|linebreaks }}
+  </div>
+</div>
+{% empty %}
+  <p>Комментов пока нет </p>
+</div>
+{% endfor %}
+
+<hr>
+<div class="card-header">
+<div align="right" class="container">
+<div class="form-comment">
+				<h4>оставить комментарий</h4>
+			</div>
+
+			<form action="{% url 'add_comments' blog.id %}" method = "post">
+				{% csrf_token %}
+				<div>
+					<label>ваш коммент</label>
+					<textarea name="text_comments"></textarea>
+				</div>
+				<div>
+					<label>ваше имя</label>
+					<input type="text" name="name">
+				</div>
+				<div>
+					<label>ваш email</label>
+					<input type="email" name="email">
+				</div>
+				<div>
+
+					<input type="submit">
+				</div>
+			</form>
+</div>
+</div>
+</body>
+
+
+
+
+{% endblock content %}

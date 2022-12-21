@@ -1,0 +1,11 @@
+{% extends 'base_input_output.html' %}
+
+{% block title %}
+    Регистрация Завершена
+{% endblock %}
+
+{% block content %}
+    <h1>Регистрация прошла успешно</h1><hr>
+    <h1>Добро Пожаловать {{ new_user.first_name }}</h1>
+    <p>Потпробуйте теперь <a href="{% url 'login' %}">Войти</a> </p>
+{% endblock %}
