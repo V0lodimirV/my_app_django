@@ -25,3 +25,10 @@ urlpatterns = [
  и вообще это упрощает отладку приложения"""
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+
+
+#конфигурация надписи админ в админке джанго
+admin.site.site_header = "Моё кастом название Админки :-)"
+admin.site.site_title = "Мой Проект"
+admin.site.index_title = "Добро Пожаловать в админку Моего Проекта"

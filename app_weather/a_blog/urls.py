@@ -2,6 +2,8 @@ from django.urls import path
 from . import views
 from django.contrib.auth import views as auth_views
 
+
+
 urlpatterns = [
     path('', views.BlogView.as_view()),#as_view потому что вьюшка реализована как класс а не функция
     path('<int:pk>/', views.BlogDetail.as_view()),
@@ -37,4 +39,5 @@ urlpatterns_auth = [
         view=auth_views.PasswordResetCompleteView.as_view(),
         name="password_reset_complete",
     ),
+
 ]

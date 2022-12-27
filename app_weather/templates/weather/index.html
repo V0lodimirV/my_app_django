@@ -6,6 +6,7 @@
       <a class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
         <svg class="bi me-2" width="40" height="32"></svg>
         <span class="fs-4">МОЙ ПРОЕКТ</span>
+          <li class="fs-7">{{ user.username }}</li>
       </a>
 
       <ul class="nav nav-pills">
@@ -14,5 +15,22 @@
           <li class="nav-item"><a href="/index_blog" class="nav-link">Блог</a></li>
           <li class="nav-item"><a href="/accounts/logout/" class="nav-link">Выйти</a></li>
       </ul>
+
     </header>
+<body>
+
+<center>
+    <h6>{{ time }}<span class="badge bg-secondary">{{ current_year }}</span></h6>
+  <style>
+   a {
+    text-decoration: none;
+   }
+  </style>
+    <li><p><a href="https://radiopotok.ru/radio/1392" target="_blank">музыку для фона?</a></p></li>
+
+</center>
+
+</body>
+
+
 {% endblock %}

@@ -1,27 +1,36 @@
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from . import forms, models
 from .forms import CommentForm
-from .models import Blog
+from .models import Blog, Profile
 from django.views import View
+from django.core.paginator import Paginator
 
 
 
 class BlogView(View):
-    '''вывод записей'''
+    '''вывод записей и пагинация'''
     def get(self, request):
+        #blog = Blog.objects.all()
         blog = Blog.objects.all()
+        p = Paginator(Blog.objects.all(), 2)
+        page = request.GET.get('page')
+        blogs = p.get_page(page)
+        nums = "a" * blogs.paginator.num_pages
         return render(request, "blog/index_blog.html",
-                      {"blog_list": blog}
+                      {"blog_list": blog,
+                       "blogs": blogs,
+                       "nums": nums}
                       )
 
 class BlogDetail(View):
-    """отдельная страница записи и комментария к ней """
+    """отдельная страница записи"""
     def get(self, request, pk):
         blog = Blog.objects.get(id=pk)
         return render(request, 'blog/BlogDetail.html',
-                          {'blog': blog},
+                          {'blog': blog
+                           }
                       )
 
 
@@ -31,6 +40,7 @@ class AddComments(View):
         form = CommentForm(request.POST)
         if form.is_valid():
             form = form.save(commit=False)
+            form.author = self.request.user #Выводим автора коммента
             form.post_id = pk
             form.save()
         return redirect(f'/{pk}')
@@ -55,10 +65,13 @@ def register(request):
                 {"new_user": new_user},
             )
         else:
-            return HttpResponse("ой, что-то пошло не так( Попробуйте ещё раз/n ")
+            return HttpResponse("ой, что-то пошло не так( Попробуйте ещё раз ")
 
     registration_form = forms.RegistrationForm()
     return render(
         request,
         "registration/register.html",
         {"form": registration_form},)
+
+
+

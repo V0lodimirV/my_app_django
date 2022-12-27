@@ -9,8 +9,18 @@
     <hr>
 
    <form action="." method="post">
-     {{ form.as_p }}
      {% csrf_token %}
+
+       <div class="form-group">
+    <input type="text" class="form-control" name="username"
+    placeholder="Логин">
+  </div>
+
+  <div class="form-group">
+    <input type="password" class="form-control" name="password"
+    placeholder="Пароль">
+  </div>
+
        <input type="hidden" name="next" value="{% url 'index' %}">
         <input type="submit" value="Войти">
    </form>
@@ -21,7 +31,11 @@
    <a href="{% url 'password_reset' %}">Забыли пароль?</a>
     </li>
     <li>
-   <a href="{% url 'register' %}">нет аккаунта?</a>
+   <a href="{% url 'register' %}">Нет аккаунта?</a>
+    </li>
+
+<li>
+   <a href="https://yandex.ru/games/app/153785#app-id=153785&catalog-session-uid=catalog-3c586d82-f32e-582a-b476-945aa68369d7-1672055994694-2936&rtx-reqid=7307688234645707579&pos=%7B%22listType%22%3A%22suggested%22%2C%22tabCategory%22%3A%22tag%22%7D">Поиграем)?</a>
     </li>
 
 

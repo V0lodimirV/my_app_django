@@ -3,11 +3,17 @@ import requests
 from .forms import CityForm
 from .models import City
 from django.contrib.auth.decorators import login_required
+from datetime import datetime
 
 
 @login_required()
 def index(request):
-    return render(request, 'weather/index.html')
+    now = datetime.now()
+    current_year = now.year
+    time = now.strftime('%H:%M %p')
+    return render(request, 'weather/index.html',
+            {"current_year": current_year,
+             "time": time})
 
 def get_weather(request):
     appid = '5d4b668bd4bc7e0c950cd5023dfe6473'
@@ -35,3 +41,17 @@ def get_weather(request):
 
     context = {'all_info': all_cities, 'form': form}
     return render(request, 'weather/weather_1.html', context)
+
+
+
+# функция демонстрации времени
+def my_time(request):
+
+    now = datetime.now()
+    current_year = now.year
+    time = now.strftime('%H:%M %p')
+
+    return render(request, 'weather/index.html',
+            {"current_year": current_year,
+             "time": time},
+                  )

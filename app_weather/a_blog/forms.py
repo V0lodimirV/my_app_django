@@ -2,11 +2,11 @@ from django import forms
 from django.contrib.auth.models import User
 from .models import Comments
 
+
 class CommentForm(forms.ModelForm):
     class Meta:
         model = Comments
-        fields = ('name',
-                  'text_comments', 'email')
+        fields = ('text_comments', 'author')
 
 
 
@@ -35,3 +35,6 @@ class RegistrationForm(forms.ModelForm):
         if cd["password"] != cd["password2"]:
             raise forms.ValidationError("Passwords are not equal")
         return cd["password2"]
+
+
+

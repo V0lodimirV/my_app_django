@@ -1,8 +1,9 @@
 {% extends 'base_blog.html' %}
 {% block content %}
-<header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+<header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom" xmlns="http://www.w3.org/1999/html">
       <a class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
         <svg class="bi me-2" width="40" height="32"></svg>
+		  <li class="fs-7">{{ user.first_name }}>>{{ user.profile.user }}</li>
       </a>
 <ul class="nav nav-pills">
 	<li class="nav-item"><a href="/index_blog" class="nav-link" >Назад</a></li>
@@ -27,7 +28,7 @@
                     </p><br>
                         <div class="item">
 						<div class="text left">
-							<p>{{ blog.text_blog }}</p>
+							<p>{{ blog.text_blog|safe }}</p>
 							<p>Автор:  {{ blog.author }}</p>
 							<p>{{ blog.date }}</p>
 						</div>
@@ -40,11 +41,10 @@
 	</div>
 </div>
 <hr>
-
 {% for comment in blog.comments.all %}
 <div class="sticky-sm-bottom">
 <div class="card text-bg-primary mb-3" style="max-width: 18rem;">
-	<div class="card-header">Комент <span class="badge bg-primary">{{ forloop.counter }}</span> от {{ comment.name }}
+	<div class="card-header">Комент <span class="badge bg-primary">{{ forloop.counter }}</span> от {{ comment.author }}
 	<br>{{ comment.created }}</div>
   <div class="comment">
     <p class="info">
@@ -71,15 +71,6 @@
 					<textarea name="text_comments"></textarea>
 				</div>
 				<div>
-					<label>ваше имя</label>
-					<input type="text" name="name">
-				</div>
-				<div>
-					<label>ваш email</label>
-					<input type="email" name="email">
-				</div>
-				<div>
-
 					<input type="submit">
 				</div>
 			</form>

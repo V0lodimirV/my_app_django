@@ -3,6 +3,8 @@
 <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
       <a class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
         <svg class="bi me-2" width="40" height="32"></svg>
+          <li class="fs-7">{{ user.username }}</li>
+
       </a>
 
 <ul class="nav nav-pills">
@@ -18,20 +20,63 @@
 				<div class="projects">
 					<h2>Записи</h2>
 					<hr>
-					{% for blog in blog_list %}
+					{% for blog in blogs %}
 					<div class="row g-0 bg-light position-relative">
   <div class="col-md-6 mb-md-0 p-md-4">
     <img src="{{ blog.img.url }}" width="190px"/>
   </div>
   <div class="col-md-6 p-4 ps-md-0">
     <h5 class="mt-0"><a href="{{ blog.id }}">{{ blog.title }}</a></h5>
-    <p>{{ blog.text_blog }}</p>
+    <p>{{ blog.text_blog|safe }}</p>
 
   </div>
 </div>
-                    <hr>
-					{% endfor %}
 
+                      {% if not blog.comments.all %}
+                    комментов пока нет
+                    {% else %}
+                    <div class="card-header">Коментов <span class="badge bg-primary">{{ blog.comments.count }}</span></div>
+                    {% endif %}
+
+                    <hr>
+                    {% endfor %}
+
+<br/>
+                    <!--
+                    {{ blogs }}<br/>
+                    предыдущая: {{ blogs.has_previous }}<br/>
+                    следующая: {{ blogs.has_next }}<br/>
+                    наша страница: {{ blogs.number }}<br/>
+                    всего страниц: {{ blogs.paginator.num_pages }}<br/>
+                    <hr><br/><br/>
+                    -->
+
+                    <nav aria-label="Page navigation example">
+  <ul class="pagination justify-content-center">
+
+
+                    {% if blogs.has_previous %}
+      <li class="page-item"><a class="page-link" href="?page=1"><span aria-hidden="true">&laquo</span></a></li>
+                    <li class="page-item"><a class="page-link" href="?page={{ blogs.previous_page_number }}">Предыдущая</a></li>
+
+                    {% endif %}
+
+                    <!--<li class="page-item disabled"><a href="#" class="page-link">Страница {{ blogs.number }} из {{ blogs.paginator.num_pages }}</a></li>-->
+
+      {% for i in nums %}
+      <li class="page-item"><a class="page-link" href="?page={{ forloop.counter }}">{{ forloop.counter }}</a></li>
+      {% endfor %}
+
+
+                    {% if blogs.has_next %}
+                    <li class="page-item"><a class="page-link" href="?page={{ blogs.next_page_number }}">Следующая</a></li>
+      <li class="page-item"><a class="page-link" href="?page={{ blogs.paginator.num_pages }}"><span aria-hidden="true">&raquo</span></a></li>
+
+                    {% endif %}
+
+  </ul>
+</nav>
+<br/>
 
 {% endblock content %}
                 </div>
