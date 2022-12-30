@@ -26,13 +26,11 @@ class Blog(models.Model):
 
 class Comments(models.Model):
     """комменты"""
-    email = models.EmailField()
-    name = models.CharField('имя', max_length=50)
     #text_comments = models.TextField('Текст коментария', max_length=2000)
     text_comments = RichTextField(blank=True, null=True)
     post = models.ForeignKey(Blog, verbose_name='коментарий к посту', on_delete=models.CASCADE, related_name="comments")
     created = models.DateField('дата добавления', auto_now_add=True, null=True)
-    author = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
+    author = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True, related_name="author")
 
 
     class Meta:

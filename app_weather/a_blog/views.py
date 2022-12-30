@@ -1,9 +1,9 @@
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from . import forms, models
 from .forms import CommentForm
-from .models import Blog, Profile
+from .models import Blog
 from django.views import View
 from django.core.paginator import Paginator
 
@@ -13,8 +13,8 @@ class BlogView(View):
     '''вывод записей и пагинация'''
     def get(self, request):
         #blog = Blog.objects.all()
-        blog = Blog.objects.all()
-        p = Paginator(Blog.objects.all(), 2)
+        blog = models.Blog.objects.prefetch_related('comments', 'author')
+        p = Paginator(Blog.objects.prefetch_related('comments'), 2)
         page = request.GET.get('page')
         blogs = p.get_page(page)
         nums = "a" * blogs.paginator.num_pages
@@ -27,7 +27,7 @@ class BlogView(View):
 class BlogDetail(View):
     """отдельная страница записи"""
     def get(self, request, pk):
-        blog = Blog.objects.get(id=pk)
+        blog = Blog.objects.select_related().get(id=pk)
         return render(request, 'blog/BlogDetail.html',
                           {'blog': blog
                            }

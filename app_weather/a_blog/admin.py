@@ -8,7 +8,7 @@ class BlogAdmin(admin.ModelAdmin):
 
 @admin.register(Comments)# регистрируем ещё одну модель в админке
 class CommentsAdmin(admin.ModelAdmin):
-    list_display = ('name', 'post', 'text_comments', 'author')
+    list_display = ('author', 'post', 'text_comments')
 
 @admin.register(Profile)
 class Profile(admin.ModelAdmin):
