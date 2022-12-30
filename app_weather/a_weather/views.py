@@ -39,6 +39,8 @@ def get_weather(request):
             }
         all_cities.append(info)
 
+
+
     context = {'all_info': all_cities, 'form': form}
     return render(request, 'weather/weather_1.html', context)
 
